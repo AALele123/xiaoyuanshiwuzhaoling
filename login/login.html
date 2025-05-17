@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5faf7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image:url("../../img/背景图.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .login-container {
+            width: 380px;
+            padding: 40px 30px;
+            background-color: rgba(255, 255, 255, 0.7);;
+            border-radius: 12px;
+            box-shadow:0 10px 30px rgba(56, 142, 60, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(2px); /* 毛玻璃效果 */
+        }
+
+        .login-container:hover {
+            box-shadow: 0 15px 35px rgba(56, 142, 60, 0.15);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            color: #2e7d32;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #2e7d32;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2e7d32;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            transition: all 0.3s;
+            background-color: #f5faf7;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #81c784;
+            box-shadow: 0 0 0 3px rgba(129, 199, 132, 0.2);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            line-height: 1;
+        }
+
+        .btn-login:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        .login-footer a {
+            color: #4caf50;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .login-footer a:hover {
+            color: #2e7d32;
+            text-decoration: underline;
+        }
+
+        .layui-form-item {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="login-container">
+        <div class="login-header">
+            <h2>欢迎进入校园失物招领</h2>
+
+            <p>请输入您的账号和密码</p>
+        </div>
+
+        <form id="loginForm" class="layui-form">
+            <div class="layui-form-item form-group">
+                <label for="username">账号</label>
+                <input type="text" name="username" id="username" required lay-verify="required"
+                       placeholder="请输入账号" autocomplete="off" class="layui-input form-control">
+            </div>
+
+            <div class="layui-form-item form-group">
+                <label for="password">密码</label>
+                <input type="password" name="password" id="password" required lay-verify="required"
+                       placeholder="请输入密码" autocomplete="off" class="layui-input form-control">
+            </div>
+
+            <button class="layui-btn layui-btn-fluid btn-login" lay-submit lay-filter="login">登 录</button>
+
+            <div class="login-footer">
+                <a href="javascript:registerClick('yonghu')">还没有账号？立即注册</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="../../layui/layui.js"></script>
+<script src="../../js/vue.js"></script>
+<!-- 引入element组件库 -->
+<script src="../../xznstatic/js/element.min.js"></script>
+<!-- 引入element样式 -->
+<link rel="stylesheet" href="../../xznstatic/css/element.min.css">
+<!-- 组件配置信息 -->
+<script src="../../js/config.js"></script>
+<!-- 扩展插件配置信息 -->
+<script src="../../modules/config.js"></script>
+<!-- 工具方法 -->
+<script src="../../js/utils.js"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            menu: menu
+        },
+        methods: {
+            jump(url) {
+                jump(url)
+            }
+        }
+    })
+    var codes = [{
+        num: 1,
+        color: '#000',
+        rotate: '10deg',
+        size: '16px'
+    }, {
+        num: 2,
+        color: '#000',
+        rotate: '10deg',
+        size: '16px'
+    }, {
+        num: 3,
+        color: '#000',
+        rotate: '10deg',
+        size: '16px'
+    }, {
+        num: 4,
+        color: '#000',
+        rotate: '10deg',
+        size: '16px'
+    }]
+
+    layui.use(['layer', 'element', 'carousel', 'form', 'http', 'jquery'], function() {
+        var layer = layui.layer;
+        var element = layui.element;
+        var carousel = layui.carousel;
+        var form = layui.form;
+        var http = layui.http;
+        var jquery = layui.jquery;
+
+        // 登录
+        form.on('submit(login)', function(data) {
+            data = data.field;
+            data.role = 'yonghu';
+
+            http.request(data.role + '/login', 'get', data, function(res) {
+                layer.msg('登录成功', {
+                    time: 2000,
+                    icon: 6
+                });
+                // 登录凭证
+                localStorage.setItem('Token', res.token);
+                localStorage.setItem('role', jquery('#role:checked').attr('title'));
+                // 当前登录用户角色
+                localStorage.setItem('userTable', data.role);
+                localStorage.setItem('sessionTable', data.role);
+                // 用户名称
+                localStorage.setItem('adminName', data.username);
+                http.request(data.role + '/session', 'get', {}, function(res) {
+                    // 用户id
+                    localStorage.setItem('userid', res.data.id);
+                    // 路径访问设置
+                    window.location.href = '../../index.html';
+                })
+
+            });
+            return false
+        });
+    });
+
+    /**
+     * 跳转登录
+     * @param {Object} tablename
+     */
+    function registerClick(tablename) {
+        window.location.href = '../' + tablename + '/register.html?tablename=' + tablename;
+    }
+</script>
+</body>
+</html>
